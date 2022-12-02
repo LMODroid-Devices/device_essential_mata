@@ -260,6 +260,10 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
+# Perf
+PRODUCT_PACKAGES += \
+    libqti-perfd-client
+
 # Permissions
 PRODUCT_COPY_FILES += \
     device/essential/mata/configs/privapp-permissions-mata.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-mata.xml \
@@ -304,7 +308,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.3-service.pixel-libperfmgr \
+    android.hardware.power@1.3-service.mata-libperfmgr \
     android.hardware.power.stats@1.0-service.pixel
 
 PRODUCT_COPY_FILES += \

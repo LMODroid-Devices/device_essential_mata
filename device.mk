@@ -121,6 +121,10 @@ PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
+# Configstore
+PRODUCT_PACKAGES += \
+    disable_configstore
+
 # Device settings
 PRODUCT_PACKAGES += \
     DeviceSettings
@@ -163,7 +167,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service \
-    android.hardware.gatekeeper@1.0.vendor
+    android.hardware.gatekeeper@1.0.vendor \
+    libion.vendor
 
 # GNSS
 PRODUCT_PACKAGES += \
@@ -190,7 +195,8 @@ PRODUCT_PACKAGES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service.mata
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
 
 # HDR
 PRODUCT_COPY_FILES += \
@@ -358,7 +364,8 @@ PRODUCT_PACKAGES += \
 
 # Radio
 PRODUCT_PACKAGES += \
-    librmnetctl
+    librmnetctl \
+    libsqlite.vendor
 
 # Recovery
 PRODUCT_COPY_FILES += \

@@ -195,8 +195,8 @@ PRODUCT_PACKAGES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
+    android.hardware.health-service.qti \
+    android.hardware.health-service.qti_recovery
 
 # HDR
 PRODUCT_COPY_FILES += \
@@ -204,6 +204,8 @@ PRODUCT_COPY_FILES += \
 
 # HIDL
 PRODUCT_PACKAGES += \
+    libhidlbase-v32.recovery \
+    libhidlbase-v32.vendor \
     libhidltransport.vendor \
     libhwbinder.vendor
 
@@ -443,8 +445,6 @@ PRODUCT_PACKAGES += \
 
 # VNDK
 PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidlbase-v32.so \
-    prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libhidlbase-v32.so \
     prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/llndk-stub/libvndksupport.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libvndksupport.so
 
 # Update this list with what each blob is actually for

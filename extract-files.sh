@@ -94,13 +94,17 @@ function blob_fixup() {
             ;;
         vendor/etc/izat.conf)
             [ "$2" = "" ] && return 0
-            sed -i "216s/PROCESS_STATE=ENABLED/PROCESS_STATE=DISABLED/g" izat.conf
+            sed -i "216s/PROCESS_STATE=ENABLED/PROCESS_STATE=DISABLED/g" "${2}"
             ;;
         vendor/lib/libmmcamera2_stats_lib.so)
             [ "$2" = "" ] && return 0
             sed -i "s/\x58\x46\xeb\xf7\x1a\xee/\x00\x20\xeb\xf7\x1a\xee/" "${2}"
             sed -i "s/\x38\x46\xd9\xf7\x0e\xec/\x00\x20\xd9\xf7\x0e\xec/" "${2}"
             sed -i "s/\x20\x68\xd9\xf7\x08\xec/\x00\x20\xd9\xf7\x08\xec/" "${2}"
+            ;;
+        vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0_vendor.so)
+            [ "$2" = "" ] && return 0
+            "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
             ;;
         vendor/lib*/libtrueportrait.so)
             [ "$2" = "" ] && return 0
@@ -116,10 +120,14 @@ function blob_fixup() {
         recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.blobmanager@1.0_vendor.so|\
         recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0-service.so|\
         recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0_vendor.so|\
-        recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so|\
+	recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so)
+            [ "$2" = "" ] && return 0
+            "${PATCHELF}" --remove-needed libhidltransport.so --remove-needed libhwbinder.so "${2}"
+            ;;
         recovery/root/vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0_vendor.so)
             [ "$2" = "" ] && return 0
             "${PATCHELF}" --remove-needed libhidltransport.so --remove-needed libhwbinder.so "${2}"
+	    "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
             ;;
         *)
             return 1
